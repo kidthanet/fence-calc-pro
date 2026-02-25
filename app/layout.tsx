@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "โปรแกรมคำนวณวัสดุล้อมรั้วมืออาชีพ",
-  description: "คำนวณราคาวัสดุล้อมรั้ว ลวดหนาม และตาข่ายแรงดึงสูง โดย PK Group",
+  title: "โปรแกรมคำนวณราคาวัสดุล้อมรั้ว",
+  description: "คำนวณราคาวัสดุล้อมรั้ว ลวดหนาม และตาข่ายแรงดึงสูง โดย แสนดีเด่น สตีล",
 };
 
 export default function RootLayout({
