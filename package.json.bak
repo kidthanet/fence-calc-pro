@@ -1,5 +1,5 @@
 {
-  "name": "fence-calc-pro",
+  "name": "fence-calculator",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -20,11 +20,9 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "autoprefixer": "^10.4.24",
     "eslint": "^4.1.1",
     "eslint-config-next": "^0.2.4",
-    "postcss": "^8.5.6",
-    "tailwindcss": "^4.2.1",
+    "tailwindcss": "^4",
     "typescript": "^5"
   }
 }

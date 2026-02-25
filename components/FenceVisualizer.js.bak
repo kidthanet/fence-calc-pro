@@ -1,0 +1,91 @@
+"use client";
+
+export default function FenceVisualizer({ width, length }) {
+  const wVal = parseFloat(width) || 0;
+  const lVal = parseFloat(length) || 0;
+
+  if (wVal <= 0 || lVal <= 0) return null;
+
+  // --- ส่วนที่แก้ไข: คำนวณสัดส่วนเพื่อให้รูปทรงเปลี่ยนตามตัวเลข ---
+  const maxCanvas = 140; // ขนาดพื้นที่วาดสูงสุดใน SVG
+  const ratio = wVal / lVal;
+  
+  let rectW, rectL;
+  if (ratio > 1) { // ถ้ากว้างมากกว่ายาว (แนวนอน)
+    rectW = maxCanvas;
+    rectL = maxCanvas / ratio;
+  } else { // ถ้ายาวมากกว่ากว้าง (แนวตั้ง)
+    rectL = maxCanvas;
+    rectW = maxCanvas * ratio;
+  }
+
+  // จัดให้อยู่กึ่งกลาง SVG (Canvas ขนาด 240x160)
+  const offsetX = (240 - rectW) / 2;
+  const offsetY = (160 - rectL) / 2;
+
+  return (
+    <div className="mt-6 bg-slate-950 p-6 rounded-[2rem] border border-slate-800 shadow-inner relative overflow-hidden">
+      <p className="text-[10px] text-blue-400 mb-6 text-center uppercase tracking-[0.2em] font-black">
+        ภาพจำลองพื้นที่ดิน (TOP VIEW)
+      </p>
+      
+      <svg viewBox="0 0 240 160" className="w-full h-auto drop-shadow-2xl">
+        <defs>
+          <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+            <polygon points="0 0, 10 3.5, 0 7" fill="#60a5fa" />
+          </marker>
+          <marker id="arrowhead-rev" markerWidth="10" markerHeight="7" refX="10" refY="3.5" orient="auto">
+            <polygon points="10 0, 0 3.5, 10 7" fill="#60a5fa" />
+          </marker>
+        </defs>
+
+        {/* พื้นที่รั้ว - เปลี่ยนค่า x, y, width, height เป็นแบบ Dynamic */}
+        <rect 
+          x={offsetX} y={offsetY} width={rectW} height={rectL} 
+          fill="rgba(59, 130, 246, 0.05)" 
+          stroke="#3b82f6" 
+          strokeWidth="2" 
+          strokeDasharray="4 2"
+        />
+
+        {/* เส้นบอกระยะด้านกว้าง (ด้านบน) */}
+        <line x1={offsetX} y1={offsetY - 15} x2={offsetX + rectW} y2={offsetY - 15} stroke="#60a5fa" strokeWidth="1" markerEnd="url(#arrowhead)" markerStart="url(#arrowhead-rev)" />
+        <text x={offsetX + (rectW/2)} y={offsetY - 22} textAnchor="middle" fill="#93c5fd" fontSize="9" fontWeight="bold" className="font-mono">
+          {wVal.toLocaleString()} M.
+        </text>
+
+        {/* เส้นบอกระยะด้านยาว (ด้านขวา) */}
+        <line x1={offsetX + rectW + 15} y1={offsetY} x2={offsetX + rectW + 15} y2={offsetY + rectL} stroke="#60a5fa" strokeWidth="1" markerEnd="url(#arrowhead)" markerStart="url(#arrowhead-rev)" />
+        <text 
+          x={offsetX + rectW + 22} y={offsetY + (rectL/2)} 
+          textAnchor="middle" fill="#93c5fd" fontSize="9" fontWeight="bold" 
+          transform={`rotate(90, ${offsetX + rectW + 22}, ${offsetY + (rectL/2)})`}
+          className="font-mono"
+        >
+          {lVal.toLocaleString()} M.
+        </text>
+
+        {/* จุดเสามุม 4 ด้าน */}
+        <circle cx={offsetX} cy={offsetY} r="3" fill="#10b981" />
+        <circle cx={offsetX + rectW} cy={offsetY} r="3" fill="#10b981" />
+        <circle cx={offsetX} cy={offsetY + rectL} r="3" fill="#10b981" />
+        <circle cx={offsetX + rectW} cy={offsetY + rectL} r="3" fill="#10b981" />
+
+        <text x="120" y={offsetY + (rectL/2) + 4} textAnchor="middle" fill="#334155" fontSize="7" fontWeight="bold" className="uppercase tracking-widest">
+          พื้นที่รั้ว
+        </text>
+      </svg>
+
+      <div className="mt-4 flex justify-between items-center text-[9px] font-bold">
+        <div className="flex items-center text-emerald-400">
+          <span className="w-2 h-2 bg-emerald-400 rounded-full mr-2"></span>
+          เสาเข้ามุม
+        </div>
+        <div className="flex items-center text-blue-400">
+          <span className="w-4 h-0.5 bg-blue-400 border border-dashed border-blue-400 mr-2"></span>
+          แนวรั้ว
+        </div>
+      </div>
+    </div>
+  );
+}
