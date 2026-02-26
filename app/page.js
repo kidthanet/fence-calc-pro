@@ -119,7 +119,7 @@ export default function FenceCalculatorPage() {
     <main className="min-h-screen bg-slate-50 py-12 px-4 font-sans text-slate-900">
       <div className="max-w-6xl mx-auto">
         <header className="mb-10 text-center">
-          <h1 className="text-4xl font-black text-blue-900 mb-3 tracking-tight uppercase">โปรแกรมคำนวณราคาวัสดุล้อมรั้ว</h1>
+          <h1 className="text-4xl font-black text-blue-900 mb-3 tracking-tight uppercase">คำนวณราคาวัสดุล้อมรั้วลวดหนาม</h1>
           <p className="text-slate-600 text-lg text-blue-600 font-bold">บริษัท แสนดีเด่น สตีล จำกัด</p>
         </header>
 
