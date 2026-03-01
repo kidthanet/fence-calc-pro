@@ -353,25 +353,7 @@ export default function FenceCalculatorPage() {
                 </div>
               </div>
 
-              <div className="mt-4 p-4 bg-white rounded-2xl shadow-lg border-2 border-dashed border-slate-200">
-                <div className="text-center">
-                  <p className="text-[11px] text-slate-500 font-bold mb-2 uppercase tracking-tight">สแกนเพื่อชำระเงิน หรือ สอบถามเพิ่มเติม</p>
-                  
-                  <div className="relative inline-block p-2 bg-white rounded-xl border border-slate-100 shadow-sm">
-                    <img 
-                      src="/images/payment-qr.png"
-                      alt="QR Code สำหรับชำระเงิน" 
-                      className="w-40 h-40 mx-auto object-contain"
-                    />
-                  </div>
-                  
-                  <div className="mt-2 flex items-center justify-center gap-2">
-                     <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
-                     <p className="text-[12px] font-black text-slate-700">ธนาคารกสิกรไทย (K-Bank)</p>
-                  </div>
-                  <p className="text-[10px] text-slate-400">บริษัท แสนดีเด่น สตีล จำกัด</p>
-                </div>
-              </div>
+              
 
               <FenceVisualizer width={String(inputs.width)} length={String(inputs.length)} />
               <WireComparison totalPerimeter={results?.perimeter || 0} />
